@@ -46,8 +46,14 @@ Route::get('/pesquisa', [LivroController::class, 'pesquisar'])->name('livros.pes
 //----------------------------------------------------------
 
 //---------------------------Autor---------------------------------
-Route::get('/admin/listarAutor', [AutorController::class, 'index'])->name('autor.index');
-Route::get('/admin/cadastrarAutor', [AutorController::class, 'create'])->name('autor.create');
+Route::get('/admin/cadastrarAutor', [AutorController::class, 'create'])->name('autores.create');
+Route::post('/autores', [AutorController::class, 'store'])->name('autores.store');
+Route::get('/admin/listarAutor', [AutorController::class, 'index'])->name('autores.index');
+
+Route::get('/editar-autor/{id}', [AutorController::class, 'editarAutor'])->name('autores.editar');
+Route::put('/atualizar-autor/{id}', [AutorController::class, 'atualizarAutor'])->name('autores.atualizar');
+Route::delete('/remover-autor/{id}', [AutorController::class, 'removerAutor'])->name('autores.remover');
+
 Route::post('/autor', [AutorController::class, 'store'])->name('autor.store');
 Route::get('/livros/{id}', [AutorController::class, 'show'])->name('livros.show');
 Route::get('/livros/categoria/{categoria}', [AutorController::class, 'porCategoria'])->name('autor.categoria');
@@ -55,10 +61,13 @@ Route::get('/pesquisa', [AutorController::class, 'pesquisar'])->name('livros.pes
 //----------------------------------------------------------
 
 //---------------------------Categoria---------------------------------
-Route::get('/admin/listarCategoria', [CategoriaController::class, 'index'])->name('categoria.index');
-Route::get('/admin/cadastrarCategoria', [CategoriaController::class, 'create'])->name('categoria.create');
-Route::post('/categoria', [CategoriaController::class, 'store'])->name('categotia.store');
-Route::get('/categoria/{id}', [CategoriaController::class, 'show'])->name('categotia.show');
+Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create');
+Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
+Route::get('/admin/listarCategoria', [CategoriaController::class, 'index'])->name('categorias.index');
+
+Route::get('/categorias/{id}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit');
+Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update');
+Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
 //----------------------------------------------------------
 
 //---------------------------Vendas---------------------------------

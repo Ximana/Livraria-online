@@ -85,19 +85,19 @@
 								<li><a href="{{ route('livros.indexAdmin') }}" class="nav-link px-3"> <span
 										class="me-2"><i class="fa fa-search"></i></span> <span>Listar Livros</span>
 								</a></li>
-								<li><a href="{{ route('autor.index') }}" class="nav-link px-3"> <span
+								<li><a href="{{ route('autores.index') }}" class="nav-link px-3"> <span
 										class="me-2"><i class="fa fa-search"></i></span> <span>Listar Autores</span>
 								</a></li>
-								<li><a href="{{ route('categoria.index') }}" class="nav-link px-3"> <span
+								<li><a href="{{ route('categorias.index') }}" class="nav-link px-3"> <span
 										class="me-2"><i class="fa fa-search"></i></span> <span>Listar Categorias</span>
 								</a></li>
 								<li><a href="{{ route('livros.create') }}" class="nav-link px-3"> <span
 										class="me-2"><i class="fa fa-plus-circle"></i></span> <span>Adicionar Livro</span>
 								</a></li>
-								<li><a href="{{ route('autor.create') }}" class="nav-link px-3"> <span
+								<li><a href="{{ route('autores.create') }}" class="nav-link px-3"> <span
 										class="me-2"><i class="fa fa-plus-circle"></i></span> <span>Adicionar Autor</span>
 								</a></li>
-								<li><a href="{{ route('categoria.create') }}" class="nav-link px-3"> <span
+								<li><a href="{{ route('categorias.create') }}" class="nav-link px-3"> <span
 										class="me-2"><i class="fa fa-plus-circle"></i></span> <span>Adicionar Categoria</span>
 								</a></li>
 							</ul>

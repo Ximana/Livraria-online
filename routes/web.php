@@ -15,6 +15,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    Route::post('/favoritos/adicionar/{livro}', [FavoritoController::class, 'adicionar'])->name('favoritos.adicionar');
+    Route::delete('/favoritos/{favorito}', [FavoritoController::class, 'remover'])->name('favoritos.remover')->middleware('auth');
+    Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.index');
 });
 
 require __DIR__.'/auth.php';
@@ -35,13 +39,22 @@ route::get('admin/dashboard', [AdminController::class, 'index'])->middleware(['a
 
 
 //----------------------------Livro---------------------------------
+Route::resource('livros', LivroController::class);
+Route::get('/livros/livraria/{id}', [LivroController::class, 'livroLivraria'])->name('livros.livraria');
+
+Route::get('/livro/{livro}', [LivroController::class, 'livroDetalhe'])->name('livro.livroDetalhe');
+
 Route::get('/admin/listarLivros', [LivroController::class, 'indexAdmin'])->name('livros.indexAdmin');
 
 Route::get('/livros', [LivroController::class, 'index'])->name('livros.index');
 Route::get('/admin/cadastrarLivro', [LivroController::class, 'create'])->name('livros.create');
 Route::post('/livros', [LivroController::class, 'store'])->name('livros.store');
+Route::get('/livros/{id}/edit', [LivroController::class, 'edit'])->name('livros.edit');
+Route::put('/livros/{id}', [LivroController::class, 'update'])->name('livros.update');
+Route::delete('/livros/{id}', [LivroController::class, 'destroy'])->name('livros.destroy');
+
 Route::get('/livros/{id}', [LivroController::class, 'show'])->name('livros.show');
-Route::get('/livros/categoria/{categoria}', [LivroController::class, 'porCategoria'])->name('livros.categoria');
+Route::get('/livros/categoria/{id}', [LivroController::class, 'livrosPorCategoria'])->name('livros.categoria');
 Route::get('/pesquisa', [LivroController::class, 'pesquisar'])->name('livros.pesquisar');
 //----------------------------------------------------------
 
@@ -54,10 +67,8 @@ Route::get('/editar-autor/{id}', [AutorController::class, 'editarAutor'])->name(
 Route::put('/atualizar-autor/{id}', [AutorController::class, 'atualizarAutor'])->name('autores.atualizar');
 Route::delete('/remover-autor/{id}', [AutorController::class, 'removerAutor'])->name('autores.remover');
 
-Route::post('/autor', [AutorController::class, 'store'])->name('autor.store');
-Route::get('/livros/{id}', [AutorController::class, 'show'])->name('livros.show');
-Route::get('/livros/categoria/{categoria}', [AutorController::class, 'porCategoria'])->name('autor.categoria');
-Route::get('/pesquisa', [AutorController::class, 'pesquisar'])->name('livros.pesquisar');
+
+
 //----------------------------------------------------------
 
 //---------------------------Categoria---------------------------------

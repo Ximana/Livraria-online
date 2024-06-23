@@ -12,4 +12,11 @@ class Autor extends Model
     protected $table = 'autores'; // Especificando o nome correto da tabela
     
     protected $fillable = ['nome', 'profissao', 'biografia'];
+
+     public function livros()
+    {
+        return $this->belongsToMany(Livro::class, 'autores_livros', 'id_autor', 'id_livro')
+                    ->withPivot('descricao')
+                    ->withTimestamps();
+    }
 }

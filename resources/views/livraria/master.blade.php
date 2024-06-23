@@ -163,7 +163,7 @@
 			<div class="w-100 pt-1 mb-5 text-right">
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<form action="urlHome" method="GET" class="modal-content modal-body border-0 p-0">
+			<form action="{{ route('livros.pesquisar') }}" method="GET" class="modal-content modal-body border-0 p-0">
 
 			<div>
             <label for="titulo">Título</label>

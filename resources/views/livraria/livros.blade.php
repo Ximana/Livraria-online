@@ -75,7 +75,7 @@
 
 
                                         <li>
-                                            
+
 
 
                                                     <form action="{{ route('favoritos.adicionar', $livro->id) }}" method="POST">
@@ -89,13 +89,30 @@
 
                                         <li><a class="btn btn-success text-white mt-2" href="{{ route('livro.livroDetalhe', $livro->id) }}"><i
                                                     class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href=""><i
-                                                    class="fas fa-cart-plus"></i></a></li>
+                                        <li>
+
+
+
+
+<form action="{{ route('carrinho.adicionar', $livro->id) }}" method="POST" class="mt-1">
+    @csrf
+    <button type="submit" class="btn btn-success text-white""><i
+                                                    class="fas fa-cart-plus"></i></button>
+</form>
+
+
+                                                </li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="card-body">
+
                                 <a href="{{ route('livro.livroDetalhe', $livro->id) }}" class="h3 text-decoration-none">{{ $livro->titulo }}</a>
+
+
+
+
+
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                     <li>
 

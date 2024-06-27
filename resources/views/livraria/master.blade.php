@@ -26,7 +26,7 @@
 				<div>
 					<i class="fa fa-envelope mx-2"></i>
 					<a class="navbar-sm-brand text-light text-decoration-none"
-						href="mailto:info@company.com">livrariacamoes@gmail.com</a>
+						href="mailto:info@company.com">livrariaximanas@gmail.com</a>
 					<i class="fa fa-phone mx-2"></i>
 					<a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">937-123-602</a>
 				</div>
@@ -100,10 +100,12 @@
 						<a class="nav-icon position-relative text-decoration-none"
 							href="{{ route('carrinho.index') }}">
 							<i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+							<!--
 							<span
 								class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
 								50
 							</span>
+						-->
 						</a>
 					@endif
 
@@ -122,6 +124,9 @@
 
 							<!--- Verificar se o usuario esta logado    -->
 							@if(auth() -> check())
+								<li>
+								<a class="dropdown-item" href="{{ route('pedidos.index') }}">Meus pedidos</a>
+							</li>
 								<li>
 <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">

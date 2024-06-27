@@ -10,12 +10,13 @@ use App\Http\Controllers\FavoritoController;
 use App\Http\Controllers\AutorController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PedidoController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
     Route::post('/favoritos/adicionar/{livro}', [FavoritoController::class, 'adicionar'])->name('favoritos.adicionar');
     Route::delete('/favoritos/{favorito}', [FavoritoController::class, 'remover'])->name('favoritos.remover')->middleware('auth');
     Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.index');
@@ -24,7 +25,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 //----------------------------Livraria---------------------------------
-route::get('/', [Homecontroller::class, 'home'])->middleware(['auth', 'verified'])->name('home');
+route::get('/', [Homecontroller::class, 'home'])->name('home');
 
 
 //-----------------------------------------------------------------
@@ -81,15 +82,31 @@ Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('ca
 Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
 //----------------------------------------------------------
 
-//---------------------------Vendas---------------------------------
+//-------------------------Carrinho---------------------------------
+
+
+Route::post('/carrinho/adicionar/{livroId}', [CarrinhoController::class, 'adicionar'])->name('carrinho.adicionar');
+Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
+Route::delete('/carrinho/{id}', [CarrinhoController::class, 'remover'])->name('carrinho.remover');
 
 
 //----------------------------------------------------------
 
 
-Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
 
-Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.index');
+//-------------------------Pedido---------------------------------
+
+
+Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
+Route::get('/pedidos/{pedido}', [PedidoController::class, 'show'])->name('pedidos.show');
+Route::post('/pedidos', [PedidoController::class, 'store'])->name('pedidos.store');
+
+
+//----------------------------------------------------------
+
+
+
+
 
 Route::get('/sobre', function () {
     return view('livraria/sobre');

@@ -94,12 +94,17 @@
 							</ul>
 						-->
 
-							<form action="" method="POST" class="mt-5">
+							<div  class="mt-5">
 								@csrf
 								<div class="row">
-									<div class="col-auto">
+									<div class="col-auto w-100 mb-1 ">
+										<label>Quantidade</label>
+										<input class="border border-success form-control" type="number" name="quantidade" id="product-quantity"
+												value="1" min="1" max="{{ $livro->quantidade }}">
 									</div>
+									<!--
 									<div class="col-auto">
+										Botao Quantidade
 										<ul class="list-inline pb-3">
 											<li class="list-inline-item text-right">Quantidade
 											<input type="hidden" name="quantidade" id="product-quanity"
@@ -113,6 +118,7 @@
 												class="btn btn-success" id="btn-plus">+</span></li>
 										</ul>
 									</div>
+								-->
 								</div>
 								<div class="row pb-3">
 
@@ -121,14 +127,35 @@
 									<input type="hidden" name="idUsuario" value="" >
 									<input type="hidden" name="idProduto" value="">
 
-									<button type="submit" class="btn btn-success btn-lg">Adicionar ao Carrinho</button>
+									
+
+									<div class="row ">
+    <div class="col-md-6 ">
+        <form action="{{ route('carrinho.adicionar', $livro->id) }}" method="POST" class="">
+            @csrf
+            <button type="submit" class="form-control btn btn-success btn-lg">
+                <i class="far fa-heart"></i> Adicionar aos favoritos
+            </button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <form action="{{ route('carrinho.adicionar', $livro->id) }}" method="POST">
+            @csrf
+            <button type="submit" class="form-control btn btn-success btn-lg">
+                <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+            </button>
+        </form>
+    </div>
+</div>
+
 
 
 
 									</div>
 								</div>
 								<input type="hidden" name="livro_id" value="{{ $livro->id }}">
-							</form>
+							</div>
 
 						</div>
 					</div>

@@ -97,11 +97,7 @@
 							<div  class="mt-5">
 								@csrf
 								<div class="row">
-									<div class="col-auto w-100 mb-1 ">
-										<label>Quantidade</label>
-										<input class="border border-success form-control" type="number" name="quantidade" id="product-quantity"
-												value="1" min="1" max="{{ $livro->quantidade }}">
-									</div>
+									
 									<!--
 									<div class="col-auto">
 										Botao Quantidade
@@ -131,7 +127,7 @@
 
 									<div class="row ">
     <div class="col-md-6 ">
-        <form action="{{ route('carrinho.adicionar', $livro->id) }}" method="POST" class="">
+        <form action="{{ route('favoritos.adicionar', $livro->id) }}" method="POST" class="">
             @csrf
             <button type="submit" class="form-control btn btn-success btn-lg">
                 <i class="far fa-heart"></i> Adicionar aos favoritos
@@ -140,12 +136,13 @@
     </div>
 
     <div class="col-md-6">
-        <form action="{{ route('carrinho.adicionar', $livro->id) }}" method="POST">
-            @csrf
-            <button type="submit" class="form-control btn btn-success btn-lg">
-                <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
-            </button>
-        </form>
+        <form action="{{ route('carrinho.adicionar', $livro->id) }}" method="POST" class="d-flex align-items-center">
+    @csrf
+    <input type="number" name="quantidade" class="form-control mr-2" value="1" min="1" max="{{ $livro->quantidade }}">
+    <button type="submit" class="btn btn-success btn-lg">
+        <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+    </button>
+</form>
     </div>
 </div>
 

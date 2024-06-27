@@ -94,8 +94,13 @@
 
 
 
+
+
+
+
 <form action="{{ route('carrinho.adicionar', $livro->id) }}" method="POST" class="mt-1">
     @csrf
+    <input type="hidden" name="quantidade" value="1">
     <button type="submit" class="btn btn-success text-white""><i
                                                     class="fas fa-cart-plus"></i></button>
 </form>

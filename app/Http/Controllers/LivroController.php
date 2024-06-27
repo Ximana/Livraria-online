@@ -14,7 +14,7 @@ class LivroController extends Controller
     
      public function index()
     {
-         $livros = Livro::with('autores', 'categorias')->paginate(1);
+         $livros = Livro::with('autores', 'categorias')->paginate(10);
         $categorias = Categoria::all();
         return view('livraria.livros', compact('livros', 'categorias'));
 

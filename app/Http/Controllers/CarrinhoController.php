@@ -22,35 +22,42 @@ class CarrinhoController extends Controller
         
     }
 
-     public function adicionar(Request $request, $livroId) // Recebe o ID do livro como parâmetro
-    {
-        // Busca o livro pelo ID
-        $livro = Livro::find($livroId);
+     public function adicionar(Request $request, $livroId)
+{
+    // Valida a quantidade
+    $request->validate([
+        'quantidade' => 'required|integer|min:1'
+    ]);
 
-        // Verifica se o livro existe
-        if (!$livro) {
-            return redirect()->back()->with('error', 'Livro não encontrado.');
-        }
+    // Busca o livro pelo ID
+    $livro = Livro::find($livroId);
 
-        // Verifica se o livro já está no carrinho do usuário logado
-        $carrinhoExistente = Carrinho::where('user_id', Auth::id())
-                                    ->where('livro_id', $livro->id)
-                                    ->first();
-
-        if ($carrinhoExistente) {
-            // Se o livro já estiver no carrinho, pode implementar uma lógica aqui se necessário
-            return redirect()->back()->with('error', 'Este livro já está no seu carrinho.');
-        }
-
-        // Cria um novo item no carrinho
-        $carrinho = new Carrinho();
-        $carrinho->user_id = Auth::id();
-        $carrinho->livro_id = $livro->id;
-        $carrinho->quantidade = 1; // Pode ajustar a quantidade conforme necessário
-        $carrinho->save();
-
-        return redirect()->back()->with('success', 'Livro adicionado ao carrinho com sucesso.');
+    // Verifica se o livro existe
+    if (!$livro) {
+        return redirect()->back()->with('error', 'Livro não encontrado.');
     }
+
+    // Verifica se o livro já está no carrinho do usuário logado
+    $carrinhoExistente = Carrinho::where('user_id', Auth::id())
+                                ->where('livro_id', $livro->id)
+                                ->first();
+
+    if ($carrinhoExistente) {
+        // Atualiza a quantidade se o livro já estiver no carrinho
+        $carrinhoExistente->quantidade += $request->input('quantidade');
+        $carrinhoExistente->save();
+        return redirect()->back()->with('success', 'Quantidade atualizada no carrinho.');
+    }
+
+    // Cria um novo item no carrinho
+    $carrinho = new Carrinho();
+    $carrinho->user_id = Auth::id();
+    $carrinho->livro_id = $livro->id;
+    $carrinho->quantidade = $request->input('quantidade');
+    $carrinho->save();
+
+    return redirect()->back()->with('success', 'Livro adicionado ao carrinho com sucesso.');
+}
 
     public function remover($id)
 {

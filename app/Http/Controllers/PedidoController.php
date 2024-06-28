@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Carrinho;
 use App\Models\Pedido;
 use App\Models\ItensPedido;
+use App\Models\Pagamento;
 use Illuminate\Support\Facades\Auth;
 
 class PedidoController extends Controller
@@ -23,14 +24,23 @@ class PedidoController extends Controller
     
     public function store(Request $request)
     {
+        // Validação do arquivo de comprovativo
+    $request->validate([
+        'comprovativo' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048', // Exemplo: máximo de 2MB
+    ]);
+    
         $user_id = auth()->id();
         $carrinhoItens = Carrinho::with('livro')->where('user_id', $user_id)->get();
 
+        if ($carrinhoItens->isEmpty()) {
+            return redirect()->route('carrinho.index')->with('error', 'Seu carrinho está vazio.');
+        }
+
         $pedido = Pedido::create([
             'user_id' => $user_id,
-            'status' => 'pendente', // ou outro status inicial
-            'total' => 0, // será atualizado abaixo
-            'data_pedido' => now(), // data atual
+            'status' => 'pendente',
+            'total' => 0,
+            'data_pedido' => now(),
         ]);
 
         $totalPedido = 0;
@@ -46,15 +56,27 @@ class PedidoController extends Controller
             $totalPedido += $totalItem;
         }
 
-        // Atualiza o total do pedido
         $pedido->update(['total' => $totalPedido]);
 
-        // Limpa o carrinho após criar o pedido
         Carrinho::where('user_id', $user_id)->delete();
 
+        $pagamento = new Pagamento();
+        $pagamento->pedido_id = $pedido->id;
+        $pagamento->user_id = $user_id;
+        $pagamento->forma_pagamento = $request->input('forma_pagamento');
 
-        //return redirect()->route('pedidos.show')->with('success', 'Pedido realizado com sucesso!');
-        return redirect()->route('carrinho.index')->with('success', 'Pedido realizado com sucesso!');
+
+        if ($request->hasFile('comprovativo')) {
+            $file = $request->file('comprovativo');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/comprovativos', $filename); // Armazena o arquivo no diretório correto
+            $pagamento->comprovativo = $filename;
+    }
+
+        $pagamento->status = 'pendente';
+        $pagamento->save();
+
+        return redirect()->route('pedidos.index')->with('success', 'Pedido e pagamento registrados com sucesso. Aguarde a confirmação.');
     }
 
     public function show($id){

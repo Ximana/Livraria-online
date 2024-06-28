@@ -13,11 +13,16 @@ class CarrinhoController extends Controller
     public function index(){
 
         // Obtém todos os itens no carrinho do usuário logado, com os detalhes do livro
-        $carrinhoItens = Carrinho::with('livro') // Carrega o relacionamento com o livro
-                                ->where('user_id', Auth::id())
-                                ->get();
+    $carrinhoItens = Carrinho::with('livro')
+                            ->where('user_id', Auth::id())
+                            ->get();
 
-        return view('livraria.carrinho', compact('carrinhoItens'));
+    // Calcula o total
+    $total = $carrinhoItens->sum(function($item) {
+        return $item->livro->preco * $item->quantidade;
+    });
+
+    return view('livraria.carrinho', compact('carrinhoItens', 'total'));
 
         
     }

@@ -79,3 +79,17 @@ CREATE TABLE favoritos (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (livro_id) REFERENCES livros(id) ON DELETE CASCADE
 );
+
+-- Estrutura para tabela pagamentos
+CREATE TABLE pagamentos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  pedido_id INT NOT NULL,
+  user_id INT NOT NULL,
+  forma_pagamento ENUM('transferencia', 'multicaixa') NOT NULL,
+  comprovativo VARCHAR(255) NOT NULL,
+  status ENUM('pendente', 'confirmado', 'recusado') DEFAULT 'pendente',
+  created_at TIMESTAMP NULL DEFAULT NULL,
+  updated_at TIMESTAMP NULL DEFAULT NULL,
+  FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);

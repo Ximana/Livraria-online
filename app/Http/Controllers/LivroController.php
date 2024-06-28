@@ -121,54 +121,22 @@ class LivroController extends Controller
     {
         $query = Livro::query();
 
-        if ($request->filled('titulo')) {
-            $query->where('titulo', 'like', '%' . $request->titulo . '%');
-        }
-
-        if ($request->filled('autor')) {
-            $query->whereHas('autores', function ($q) use ($request) {
-                $q->where('nome', 'like', '%' . $request->autor . '%');
-            });
-        }
-
-        if ($request->filled('isbn')) {
-            $query->where('isbn', 'like', '%' . $request->isbn . '%');
-        }
-
-
-        //$livros = $query->with('autores', 'categorias')->paginate(10);
-        //return view('resultados.pesquisa', compact('livros'));
-
-        $livros = $query->with(['categorias', 'autores'])->paginate(10);
-        $categorias = Categoria::all();
-
-        return view('livraria.livros', compact('livros', 'categorias'));
+    if ($request->filled('pesquisa')) {
+        $termoPesquisa = $request->pesquisa;
+        $query->where(function ($query) use ($termoPesquisa) {
+            $query->where('titulo', 'like', '%' . $termoPesquisa . '%')
+                ->orWhere('isbn', 'like', '%' . $termoPesquisa . '%')
+                ->orWhereHas('autores', function ($q) use ($termoPesquisa) {
+                    $q->where('nome', 'like', '%' . $termoPesquisa . '%');
+                });
+        });
     }
 
-    public function pesquisarAAAAA(Request $request)
-    {
-        $query = Livro::query();
+    $livros = $query->with(['categorias', 'autores'])->paginate(10);
+    $categorias = Categoria::all();
 
-        if ($request->filled('titulo')) {
-            $query->where('titulo', 'like', '%' . $request->input('titulo') . '%');
-        }
-
-        if ($request->filled('isbn')) {
-            $query->where('isbn', 'like', '%' . $request->input('isbn') . '%');
-        }
-
-        if ($request->filled('autor')) {
-            $query->whereHas('autores', function ($q) use ($request) {
-                $q->where('nome', 'like', '%' . $request->input('autor') . '%');
-            });
-        }
-
-        $livros = $query->with(['categorias', 'autores'])->get();
-        $categorias = Categoria::all();
-
-        return view('livraria.livros', compact('livros', 'categorias'));
+    return view('livraria.livros', compact('livros', 'categorias'));
     }
-
 
         
 }

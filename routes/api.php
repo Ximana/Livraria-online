@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\UsuarioController;
 
 
 // Rotas para livros
-Route::get('/livros', [LivroController::class, 'index']);
+Route::get('livros', [LivroController::class, 'index']);
 Route::get('livros/{id}', [LivroController::class, 'show']);
 Route::post('livros', [LivroController::class, 'store']);
 Route::put('livros/{id}', [LivroController::class, 'update']);

@@ -61,7 +61,7 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                <!-- Email Address -->
+                <!-- Email -->
                 <div class="form-group">
                     <label for="email">Email</label>
                     <div class="input-group">
@@ -90,17 +90,17 @@
                 <!-- Remember Me -->
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="remember_me" name="remember">
-                    <label class="form-check-label" for="remember_me">Remember me</label>
+                    <label class="form-check-label" for="remember_me">Lembrar minha password</label>
                 </div>
 
-                <!-- Forgot Your Password -->
+                <!-- Escqueceu sua Password -->
                 <div class="form-group">
                     @if (Route::has('password.request'))
-                    <a class="text-muted" href="{{ route('password.request') }}">Forgot your password?</a>
+                    <a class="text-muted" href="{{ route('password.request') }}">Escqueceu sua password?</a>
                     @endif
                 </div>
 
-                <!-- Login Button -->
+                <!-- Login Botao -->
                 <button type="submit" class="btn btn-success login-btn">Login</button>
             </form>
         </div>

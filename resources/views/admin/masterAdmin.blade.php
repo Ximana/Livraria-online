@@ -21,6 +21,10 @@
 <body>
 
 	@include('admin/menu')
+
+	@include('livraria/mensagens')
+
+    
 	
 	@yield('content')
 	
@@ -30,9 +34,4 @@
 
 
 
-	<!-- Authentication 
-                        <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <input type="submit" value="Logout">
-                -->
+	

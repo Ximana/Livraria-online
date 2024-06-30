@@ -11,6 +11,7 @@ use App\Http\Controllers\AutorController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\ContactController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -101,10 +102,18 @@ Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index'
 Route::get('/pedidos/{pedido}', [PedidoController::class, 'show'])->name('pedidos.show');
 Route::post('/pedidos', [PedidoController::class, 'store'])->name('pedidos.store');
 
+Route::get('/admin/pedidosPendentes', [PedidoController::class, 'pedidosPendentes'])->name('pedidos.pendentes');
+Route::get('/admin/pedidosDetalhe/{pedido}', [PedidoController::class, 'detalhes'])->name('pedidos.detalhes');
+
+Route::put('/admin/pedidos/{id}/atualizar-status', [PedidoController::class, 'atualizarStatusPedido'])->name('pedidos.atualizarStatus');
+Route::put('/admin/pagamentos/{id}/atualizar-status', [PedidoController::class, 'atualizarStatusPagamento'])->name('pagamentos.atualizarStatus');
+
+Route::get('/admin/pedidos-concluidos', [PedidoController::class, 'pedidosConcluidos'])->name('pedidos.concluidos');
 
 //----------------------------------------------------------
 
 
+Route::post('/contact/send', [ContactController::class, 'sendContactForm'])->name('contact.send');
 
 
 

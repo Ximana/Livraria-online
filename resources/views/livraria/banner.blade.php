@@ -11,26 +11,14 @@
 				<div class="container">
 					<div class="row p-5">
 						<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-							<img class="img-fluid" src="{{ asset('img/banner_img_01.jpg') }}" alt="" />
+							<img class="img-fluid" src="{{ asset('img/banner_img_011.jpg') }}" alt="" />
 						</div>
 						<div class="col-lg-6 mb-0 d-flex align-items-center">
 							<div class="text-align-left align-self-center">
-								<h1 class="h1 text-success">Livraria <b>Camões</b> </h1>
-								<h3 class="h2">Quem lê um livro, Nunca é a mesmo!</h3>
+								<h1 class="h1 text-success">Livraria <b>XM</b> </h1>
+								<h3 class="h2">"Onde cada página conta uma história"</h3>
 								<p>
-									Zay Shop is an eCommerce HTML5 CSS template with latest
-									version of Bootstrap 5 (beta 1). This template is 100% free
-									provided by
-									<a rel="sponsored" class="text-success" href="https://templatemo.com"
-										target="_blank">TemplateMo</a>
-									website. Image credits go to
-									<a rel="sponsored" class="text-success" href="https://stories.freepik.com/"
-										target="_blank">Freepik Stories</a>,
-									<a rel="sponsored" class="text-success" href="https://unsplash.com/"
-										target="_blank">Unsplash</a>
-									and
-									<a rel="sponsored" class="text-success" href="https://icons8.com/"
-										target="_blank">Icons 8</a>.
+									Descubra um mundo de histórias na nossa livraria online, onde cada livro é uma porta para aventuras infinitas e conhecimentos profundos. Explore best-sellers, clássicos intemporais e novidades emocionantes que vão inspirar, educar e transformar sua jornada de leitura.
 								</p>
 							</div>
 						</div>
@@ -45,13 +33,10 @@
 						</div>
 						<div class="col-lg-6 mb-0 d-flex align-items-center">
 							<div class="text-align-left">
-								<h1 class="h1">Proident occaecat</h1>
-								<h3 class="h2">Aliquip ex ea commodo consequat</h3>
+								<h1 class="h1"></h1>
+								<h3 class="h2">Bem-vindo ao seu refúgio literário, onde as palavras ganham vida.</h3>
 								<p>
-									You are permitted to use this Zay CSS template for your
-									commercial websites. You are
-									<strong>not permitted</strong> to re-distribute the template
-									ZIP file in any kind of template collection websites.
+									Na nossa livraria online, cada página é uma porta para novas aventuras literárias. Encontre seu próximo livro favorito hoje mesmo!
 								</p>
 							</div>
 						</div>
@@ -66,13 +51,9 @@
 						</div>
 						<div class="col-lg-6 mb-0 d-flex align-items-center">
 							<div class="text-align-left">
-								<h1 class="h1">Repr in voluptate</h1>
-								<h3 class="h2">Ullamco laboris nisi ut</h3>
+								<h1 class="h1">Expandindo Horizontes através das Palavras</h1>
 								<p>
-									We bring you 100% free CSS templates for your websites. If
-									you wish to support TemplateMo, please make a small
-									contribution via PayPal or tell your friends about our
-									website. Thank you.
+									Explore uma vasta coleção de livros que vão desde clássicos intemporais até as últimas novidades literárias. Encontre o livro perfeito para cada momento e mergulhe em histórias que inspiram, educam e entretêm.
 								</p>
 							</div>
 						</div>

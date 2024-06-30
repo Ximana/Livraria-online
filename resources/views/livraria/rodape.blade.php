@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-md-4 pt-5">
 					<h2 class="h2 text-success border-bottom pb-3 border-light logo">
-					Livraria Camões
+					Livraria XM
 					</h2>
 					<ul class="list-unstyled text-light footer-link-list">
 						<li>
@@ -17,7 +17,7 @@
 						</li>
 						<li>
 							<i class="fa fa-envelope fa-fw"></i>
-							<a class="text-decoration-none" href="mailto:info@company.com">livrariacamoes@gmail.com</a>
+							<a class="text-decoration-none" href="">livrariacamoes@gmail.com</a>
 						</li>
 					</ul>
 				</div>
@@ -98,7 +98,7 @@
 					<div class="col-12">
 						<p class="text-left text-light">
 							Copyright &copy; 2024 Livraria Camões | Feito
-							<a rel="sponsored" href="https://templatemo.com" target="_blank">Paulo Ximana</a>
+							<a rel="sponsored" href="https://" target="_blank">Paulo Ximana</a>
 						</p>
 					</div>
 				</div>

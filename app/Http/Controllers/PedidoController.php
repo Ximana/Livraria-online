@@ -92,4 +92,54 @@ class PedidoController extends Controller
         //return view('livraria.pedidos');
     }
 
+    public function pedidosPendentes()
+    {
+          $pedidos = Pedido::whereIn('status', ['Pendente', 'Em processamento'])
+                     ->with('user') // Carrega o relacionamento com o usuário
+                     ->orderBy('created_at', 'desc')
+                     ->paginate(10); // Paginação com 10 itens por página
+
+        return view('admin.listarPedidosPendentes', compact('pedidos'));
+}
+
+public function pedidosConcluidos()
+{
+    $pedidos = Pedido::where('status', 'Concluido')
+                     ->with('user') // Carrega o relacionamento com o usuário
+                     ->orderBy('created_at', 'desc')
+                     ->paginate(10); // Paginação com 10 itens por página
+
+    return view('admin.listarPedidosConcluidos', compact('pedidos'));
+}
+
+
+
+ public function detalhes($id)
+    {
+        // Busca os dados do pedido junto com o usuário relacionado
+        $pedido = Pedido::with('user', 'itens.livro')->findOrFail($id);
+
+        // Busca os dados do pagamento relacionado ao pedido
+        $pagamento = Pagamento::where('pedido_id', $id)->first();
+
+        return view('admin..detalhesPedido', compact('pedido', 'pagamento'));
+    }
+
+    public function atualizarStatusPedido(Request $request, $id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        $pedido->status = $request->status;
+        $pedido->save();
+
+        return redirect()->route('pedidos.detalhes', $id)->with('success', 'Status do pedido atualizado com sucesso.');
+    }
+
+    public function atualizarStatusPagamento(Request $request, $id)
+    {
+        $pagamento = Pagamento::findOrFail($id);
+        $pagamento->status = $request->status;
+        $pagamento->save();
+
+        return redirect()->route('pedidos.detalhes', $pagamento->pedido_id)->with('success', 'Status do pagamento atualizado com sucesso.');
+    }
 }

@@ -45,6 +45,41 @@
             @endif
         </div>
 
+        <!-- Nacionalidade -->
+        <div class="col-md-6">
+            <x-input-label for="nacionalidade" :value="__('Nacionalidade')" class="form-label"/>
+            <x-text-input id="nacionalidade" name="nacionalidade" type="text" class="form-control mt-1" :value="old('nacionalidade', $user->nacionalidade)" />
+            <x-input-error class="text-danger mt-2" :messages="$errors->get('nacionalidade')" />
+        </div>
+
+        <!-- Profissão -->
+        <div class="col-md-6">
+            <x-input-label for="profissao" :value="__('Profissão')" class="form-label"/>
+            <x-text-input id="profissao" name="profissao" type="text" class="form-control mt-1" :value="old('profissao', $user->profissao)" />
+            <x-input-error class="text-danger mt-2" :messages="$errors->get('profissao')" />
+        </div>
+
+        <!-- Número do BI -->
+        <div class="col-md-6">
+            <x-input-label for="numero_bi" :value="__('Número do BI')" class="form-label"/>
+            <x-text-input id="numero_bi" name="numero_bi" type="text" class="form-control mt-1" :value="old('numero_bi', $user->numero_bi)" />
+            <x-input-error class="text-danger mt-2" :messages="$errors->get('numero_bi')" />
+        </div>
+
+        <!-- Morada -->
+        <div class="col-md-6">
+            <x-input-label for="morada" :value="__('Morada')" class="form-label"/>
+            <x-text-input id="morada" name="morada" type="text" class="form-control mt-1" :value="old('morada', $user->morada)" />
+            <x-input-error class="text-danger mt-2" :messages="$errors->get('morada')" />
+        </div>
+
+        <!-- Telefone -->
+        <div class="col-md-6">
+            <x-input-label for="telefone" :value="__('Telefone')" class="form-label"/>
+            <x-text-input id="telefone" name="telefone" type="text" class="form-control mt-1" :value="old('telefone', $user->telefone)" />
+            <x-input-error class="text-danger mt-2" :messages="$errors->get('telefone')" />
+        </div>
+
         <div class="col-12 d-flex justify-content-end">
             <x-primary-button class="btn btn-success">
                 {{ __('Atualizar') }}

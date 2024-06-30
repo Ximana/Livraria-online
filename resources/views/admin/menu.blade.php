@@ -112,10 +112,13 @@
 						<div class="text-muted small fw-bold text-uppercase px-3 mb-3">
 							Relatorio</div>
 					</li>
-					<li><a href="clientes.html" class="nav-link px-3"> <span class="me-2"><i
-								class="fa fa-archive"></i></span> <span>Vendas</span>
+					<li><a href="{{ route('pedidos.pendentes') }}" class="nav-link px-3"> <span class="me-2"><i
+								class="fa fa-archive"></i></span> <span>Pedidos Pendentes</span>
 					</a></li>
-					<li><a href="relatorio.html" class="nav-link px-3"> <span class="me-2"><i
+					<li><a href="{{ route('pedidos.concluidos') }}" class="nav-link px-3"> <span class="me-2"><i
+								class="fa fa-archive"></i></span> <span>Pedidos Concluidos</span>
+					</a></li>
+					<li><a href="" class="nav-link px-3"> <span class="me-2"><i
 								class="fa fa-list-alt"></i></span> <span>Relatorio</span>
 					</a></li>
 				</ul>

@@ -11,6 +11,11 @@ class FavoritoController extends Controller
 {
     public function adicionar(Request $request, $livroId)
     {
+        // Verifica se há um usuário logado
+    if (!Auth::check()) {
+        return redirect()->back()->with('error', 'Você precisa estar logado para adicionar itens como favorito.');
+    }
+
         // Verificar se o livro já está marcado como favorito pelo usuário
     if ($request->user()->favoritos()->where('livro_id', $livroId)->exists()) {
         return redirect()->back()->with('status', 'Este livro já está nos seus favoritos.');

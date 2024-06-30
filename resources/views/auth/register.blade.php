@@ -33,6 +33,41 @@
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
+                    <!-- Nacionalidade -->
+                    <div class="col-md-6 mb-3">
+                        <label for="nacionalidade" class="form-label">Nacionalidade</label>
+                        <input type="text" class="form-control" id="nacionalidade" name="nacionalidade" value="{{ old('nacionalidade') }}" placeholder="Sua Nacionalidade">
+                        <x-input-error :messages="$errors->get('nacionalidade')" class="mt-2" />
+                    </div>
+
+                    <!-- Profissão -->
+                    <div class="col-md-6 mb-3">
+                        <label for="profissao" class="form-label">Profissão</label>
+                        <input type="text" class="form-control" id="profissao" name="profissao" value="{{ old('profissao') }}" placeholder="Sua Profissão">
+                        <x-input-error :messages="$errors->get('profissao')" class="mt-2" />
+                    </div>
+
+                    <!-- Número do BI -->
+                    <div class="col-md-6 mb-3">
+                        <label for="numero_bi" class="form-label">Número do BI</label>
+                        <input type="text" class="form-control" id="numero_bi" name="numero_bi" value="{{ old('numero_bi') }}" placeholder="Seu Número do BI">
+                        <x-input-error :messages="$errors->get('numero_bi')" class="mt-2" />
+                    </div>
+
+                    <!-- Morada -->
+                    <div class="col-md-6 mb-3">
+                        <label for="morada" class="form-label">Morada</label>
+                        <input type="text" class="form-control" id="morada" name="morada" value="{{ old('morada') }}" placeholder="Sua Morada">
+                        <x-input-error :messages="$errors->get('morada')" class="mt-2" />
+                    </div>
+
+                    <!-- Telefone -->
+                    <div class="col-md-6 mb-3">
+                        <label for="telefone" class="form-label">Telefone</label>
+                        <input type="text" class="form-control" id="telefone" name="telefone" value="{{ old('telefone') }}" placeholder="Seu Telefone">
+                        <x-input-error :messages="$errors->get('telefone')" class="mt-2" />
+                    </div>
+
                     <!-- Password -->
                     <div class="col-md-6 mb-3">
                         <label for="password" class="form-label">Password</label>

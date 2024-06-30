@@ -29,6 +29,11 @@ class CarrinhoController extends Controller
 
      public function adicionar(Request $request, $livroId)
 {
+    // Verifica se há um usuário logado
+    if (!Auth::check()) {
+        return redirect()->back()->with('error', 'Você precisa estar logado para adicionar itens ao carrinho.');
+    }
+    
     // Valida a quantidade
     $request->validate([
         'quantidade' => 'required|integer|min:1'

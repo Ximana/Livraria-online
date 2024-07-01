@@ -7,17 +7,44 @@ use App\Http\Controllers\Api\PagamentoController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LivroController;
 use App\Http\Controllers\Api\UsuarioController;
-
+use App\Http\Controllers\Api\AutorController;
+use App\Http\Controllers\Api\CategoriaController;
 
 // Rotas para livros
-Route::get('livros', [LivroController::class, 'index']);
-Route::get('livros/{id}', [LivroController::class, 'show']);
-Route::post('livros', [LivroController::class, 'store']);
-Route::put('livros/{id}', [LivroController::class, 'update']);
-Route::delete('livros/{id}', [LivroController::class, 'destroy']);
-Route::get('categorias/{id}/livros', [LivroController::class, 'livrosPorCategoria']);
-Route::post('livros/pesquisar', [LivroController::class, 'pesquisar']);
+Route::prefix('livros')->group(function () {
+    Route::get('/', [LivroController::class, 'index']);
+    Route::get('/{id}', [LivroController::class, 'show']);
+    Route::post('/', [LivroController::class, 'store']);
+    Route::put('/{id}', [LivroController::class, 'update']);
+    Route::delete('/{id}', [LivroController::class, 'destroy']);
+    Route::post('/pesquisar', [LivroController::class, 'pesquisar']);
+	Route::get('/categoria/{id}', [LivroController::class, 'livrosPorCategoria']);
+});
 
+
+// Rotas para Autores
+Route::prefix('autores')->group(function () {
+    Route::get('/', [AutorController::class, 'index']);
+    Route::post('/', [AutorController::class, 'store']);
+    Route::get('/{id}', [AutorController::class, 'show']);
+    Route::put('/{id}', [AutorController::class, 'update']);
+    Route::delete('/{id}', [AutorController::class, 'destroy']);
+});
+// Rotas para Categorias
+Route::prefix('categorias')->group(function () {
+    Route::get('/', [CategoriaController::class, 'index']);
+    Route::post('/', [CategoriaController::class, 'store']);
+    Route::get('/{id}', [CategoriaController::class, 'show']);
+    Route::put('/{id}', [CategoriaController::class, 'update']);
+    Route::delete('/{id}', [CategoriaController::class, 'destroy']);
+});
+
+// Rotas para Usuarios
+Route::prefix('usuarios')->group(function () {
+    Route::post('cadastrar', [UsuarioController::class, 'cadastrar']);
+    Route::post('login', [UsuarioController::class, 'login']);
+    Route::post('logout', [UsuarioController::class, 'logout'])->middleware('auth:sanctum');
+});
 
 // Rotas para pedidos
 Route::get('pedidos', [PedidoController::class, 'index']);

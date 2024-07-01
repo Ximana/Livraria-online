@@ -1,0 +1,34 @@
+// Adicionar Livro, metodo "POST"
+
+{
+    "titulo": "Exemplo de Livro",
+    "editora": "Editora Exemplo",
+    "isbn": "123-4567890123",
+    "idioma": "Português",
+    "resumo": "Resumo do livro exemplo.",
+    "data_publicacao": "2023-07-01",
+    "preco": 29.90,
+    "quantidade": 10,
+    "autores": [1, 2],
+    "categorias": [1, 3]
+}
+
+// Atualizando um livro metodo: "Método: PUT (ou PATCH)"
+{
+    "titulo": "Livro Atualizado",
+    "editora": "Editora Atualizada",
+    "isbn": "123-4567890123",
+    "idioma": "Português",
+    "resumo": "Resumo atualizado do livro.",
+    "data_publicacao": "2023-07-01",
+    "preco": 39.90,
+    "quantidade": 15,
+    "autores": [1, 2],
+    "categorias": [1, 3]
+}
+
+// Pesquisar um livro metodo: "Método: GET"
+{
+    "pesquisa": "palavra-chave"
+}
+

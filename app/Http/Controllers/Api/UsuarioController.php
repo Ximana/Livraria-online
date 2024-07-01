@@ -9,11 +9,16 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use App\Http\Requests\Auth\LoginRequest;
 
 class UsuarioController extends Controller
 {
+    /**
+     * Cadastra um novo usuário.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function cadastrar(Request $request): JsonResponse
     {
         $request->validate([
@@ -40,16 +45,15 @@ class UsuarioController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
-
-        if ($request->user()->tipo === 'admin') {
-            return response()->json(['message' => 'Registered successfully'], 201);
-        }
-
-        return response()->json(['message' => 'Registered successfully'], 201);
+        return response()->json(['message' => 'Usuário registrado com sucesso'], 201);
     }
 
-    
+    /**
+     * Faz login do usuário e retorna o token de acesso.
+     *
+     * @param  \App\Http\Requests\Auth\LoginRequest  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(LoginRequest $request): JsonResponse
     {
         $credentials = $request->validated();
@@ -65,13 +69,19 @@ class UsuarioController extends Controller
             ]);
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        return response()->json(['error' => 'Credenciais inválidas'], 401);
     }
 
+    /**
+     * Faz logout do usuário (revoga todos os tokens ativos).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(Request $request): JsonResponse
     {
         $request->user()->tokens()->delete();
 
-        return response()->json(['message' => 'Logged out successfully']);
+        return response()->json(['message' => 'Sessão terminada com sucesso']);
     }
 }

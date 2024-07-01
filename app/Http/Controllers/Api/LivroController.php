@@ -8,19 +8,20 @@ use Illuminate\Http\Request;
 use App\Models\Autor;
 use App\Models\Categoria;
 use App\Models\Livro;
+use Illuminate\Support\Facades\Validator;
 
 class LivroController extends Controller
 {
     public function index()
     {
-        $livros = Livro::with('autores', 'categorias')->paginate(10);
+        $livros = Livro::with('autores', 'categorias')->get();
 
         return response()->json($livros, 200);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'titulo' => 'required|string|max:255',
             'editora' => 'nullable|string|max:255',
             'isbn' => 'nullable|string|max:255',
@@ -32,6 +33,10 @@ class LivroController extends Controller
             'autores' => 'required|array',
             'categorias' => 'required|array',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
 
         $livro = Livro::create($request->all());
         $livro->autores()->attach($request->autores);
@@ -48,7 +53,7 @@ class LivroController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'titulo' => 'required|string|max:255',
             'editora' => 'nullable|string|max:255',
             'isbn' => 'nullable|string|max:255',
@@ -60,6 +65,10 @@ class LivroController extends Controller
             'autores' => 'required|array',
             'categorias' => 'required|array',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
 
         $livro = Livro::findOrFail($id);
         $livro->update($request->all());
@@ -74,33 +83,39 @@ class LivroController extends Controller
         $livro = Livro::findOrFail($id);
         $livro->delete();
 
-        return response()->json(null, 204);
+        return response()->json(['message' => 'Livro deletado com sucesso'], 204);
     }
 
     public function livrosPorCategoria($id)
     {
         $categoria = Categoria::findOrFail($id);
-        $livros = $categoria->livros()->with('autores')->paginate(10);
+        $livros = $categoria->livros()->with('autores')->get();
 
         return response()->json($livros);
     }
 
     public function pesquisar(Request $request)
     {
-        $query = Livro::query();
+        $validator = Validator::make($request->all(), [
+            'pesquisa' => 'required|string',
+        ]);
 
-        if ($request->filled('pesquisa')) {
-            $termoPesquisa = $request->pesquisa;
-            $query->where(function ($query) use ($termoPesquisa) {
-                $query->where('titulo', 'like', '%' . $termoPesquisa . '%')
-                    ->orWhere('isbn', 'like', '%' . $termoPesquisa . '%')
-                    ->orWhereHas('autores', function ($q) use ($termoPesquisa) {
-                        $q->where('nome', 'like', '%' . $termoPesquisa . '%');
-                    });
-            });
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $livros = $query->with(['categorias', 'autores'])->paginate(10);
+        $query = Livro::query();
+
+        $termoPesquisa = $request->pesquisa;
+        $query->where(function ($query) use ($termoPesquisa) {
+            $query->where('titulo', 'like', '%' . $termoPesquisa . '%')
+                ->orWhere('isbn', 'like', '%' . $termoPesquisa . '%')
+                ->orWhereHas('autores', function ($q) use ($termoPesquisa) {
+                    $q->where('nome', 'like', '%' . $termoPesquisa . '%');
+                });
+        });
+
+        $livros = $query->with(['categorias', 'autores'])->get();
 
         return response()->json($livros);
     }

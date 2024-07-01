@@ -28,7 +28,6 @@
                     <th>Editora</th>
                     <th>ISBN</th>
                     <th>Idioma</th>
-                    <th>Resumo</th>
                     <th>Data de Publicação</th>
                     <th>Preço</th>
                     <th>Quantidade</th>
@@ -51,7 +50,6 @@
                     <td>{{ $livro->editora }}</td>
                     <td>{{ $livro->isbn }}</td>
                     <td>{{ $livro->idioma }}</td>
-                    <td>{{ $livro->resumo }}</td>
                     <td>{{ $livro->data_publicacao }}</td>
                     <td>R$ {{ $livro->preco }}</td>
                     <td>{{ $livro->quantidade }}</td>

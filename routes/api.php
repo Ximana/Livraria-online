@@ -41,9 +41,9 @@ Route::prefix('categorias')->group(function () {
 
 // Rotas para Usuarios
 Route::prefix('usuarios')->group(function () {
-    Route::post('cadastrar', [UsuarioController::class, 'cadastrar']);
-    Route::post('login', [UsuarioController::class, 'login']);
-    Route::post('logout', [UsuarioController::class, 'logout'])->middleware('auth:sanctum');
+    Route::post('/cadastrar', [UsuarioController::class, 'cadastrar']);
+    Route::post('/login', [UsuarioController::class, 'login']);
+    Route::post('/logout', [UsuarioController::class, 'logout'])->middleware('auth:sanctum');
 });
 
 // Rotas para pedidos

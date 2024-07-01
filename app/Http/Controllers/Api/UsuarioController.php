@@ -43,8 +43,6 @@ class UsuarioController extends Controller
             'telefone' => $request->telefone,
         ]);
 
-        event(new Registered($user));
-
         return response()->json(['message' => 'Usuário registrado com sucesso'], 201);
     }
 
@@ -58,18 +56,18 @@ class UsuarioController extends Controller
     {
         $credentials = $request->validated();
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('authToken')->plainTextToken;
+    if (Auth::attempt($credentials)) {
+        $user = Auth::user();
+        $token = $user->createToken('authToken')->plainTextToken;
 
-            return response()->json([
-                'access_token' => $token,
-                'token_type' => 'Bearer',
-                'user' => $user,
-            ]);
-        }
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'user' => $user,
+        ]);
+    }
 
-        return response()->json(['error' => 'Credenciais inválidas'], 401);
+    return response()->json(['error' => 'Credenciais inválidas'], 401);
     }
 
     /**
